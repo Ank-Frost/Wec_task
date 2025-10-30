@@ -13,7 +13,7 @@ server.bind((host,port)) # bind it to port in the given ip
 server.listen() #start listening
 
 cmds=['SET','GET','DEL']
-data={} # This is our in-memory store, 
+data={} 
 
 def resp_encode(msg_list):
     cmd = ""
@@ -71,7 +71,7 @@ def client_cmd_handler(cmd, client_socket): # Must accept client_socket
     if not cmd: # Handle empty command
         return
         
-    c = cmd[0].upper() # Use .upper() to accept 'set' or 'SET'
+    c = cmd[0].upper() # .upper() to accept 'set' or 'SET'
     
     try:
         if c == 'SET' and len(cmd) == 3:
@@ -120,5 +120,6 @@ def accept_connections():
         # Start a thread to handle this specific client's requests
         thread = threading.Thread(target = handle_client, args = (client_socket, add))
         thread.start()
+
 
 accept_connections()
